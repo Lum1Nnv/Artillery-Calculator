@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtaCalc Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card header-card">
+            <div class="selectors">
+                <div class="select-group">
+                    <label>Орудие</label>
+                    <select id="weaponSelect"></select>
+                </div>
+                <div class="select-group">
+                    <label>Снаряд</label>
+                    <select id="projSelect"></select>
+                </div>
+                <div class="select-group">
+                    <label>Траектория</label>
+                    <select id="trajSelect"></select>
+                </div>
+                <div class="select-group">
+                    <label>Заряд</label>
+                    <select id="chargeSelect"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-layout">
+            <div class="card">
+                <h3>ОРУДИЕ</h3>
+                <div class="input-group">
+                    <input type="number" id="gunX" placeholder="X (3 или 4 цифры)">
+                    <input type="number" id="gunY" placeholder="Y (3 или 4 цифры)">
+                    <input type="number" id="gunAlt" placeholder="Высота (м)">
+                </div>
+                <div class="tactical-grid-container" id="gunTacticalGrid">
+                    <div class="crosshair-h"></div>
+                    <div class="crosshair-v"></div>
+                    <div class="dot" id="gunDot"></div>
+                </div>
+                <div class="grid-header">
+                    <div class="offset-display">Смещение: <span id="gunOffsetTxt">X: 0, Y: 0</span></div>
+                    <button class="expand-btn" onclick="toggleFullscreen('gunTacticalGrid')">🔍</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>ЦЕЛЬ</h3>
+                <div class="input-group">
+                    <input type="number" id="targetX" placeholder="X (3 или 4 цифры)">
+                    <input type="number" id="targetY" placeholder="Y (3 или 4 цифры)">
+                    <input type="number" id="targetAlt" placeholder="Высота (м)">
+                </div>
+                <div class="tactical-grid-container" id="targetTacticalGrid">
+                    <div class="crosshair-h"></div>
+                    <div class="crosshair-v"></div>
+                    <div class="dot" id="targetDot"></div>
+                </div>
+                <div class="grid-header">
+                    <div class="offset-display">Смещение: <span id="targetOffsetTxt">X: 0, Y: 0</span></div>
+                    <button class="expand-btn" onclick="toggleFullscreen('targetTacticalGrid')">🔍</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card weather-card">
+            <h3>МЕТЕОУСЛОВИЯ</h3>
+            <div class="weather-grid">
+                <div class="input-group"><label>Темп. (°C)</label><input type="number" id="envTemp" value="15"></div>
+                <div class="input-group"><label>Давление</label><input type="number" id="envPress" value="1013"></div>
+                <div class="input-group"><label>Напр. ветра</label><input type="number" id="envWindDir" value="0"></div>
+                <div class="input-group"><label>Скор. ветра</label><input type="number" id="envWindSpd" value="0"></div>
+            </div>
+        </div>
+
+        <button id="calcBtn" class="primary-btn">РАССЧИТАТЬ</button>
+
+        <div class="results">
+            <div class="result-box main-result">
+                <span class="label">АЗИМУТ</span>
+                <span class="value" id="resAzimuth">---</span>
+                <span class="unit">милов</span>
+            </div>
+            <div class="result-box main-result">
+                <span class="label">ЭЛЕВАЦИЯ</span>
+                <span class="value" id="resElevation">---</span>
+                <span class="unit">милов</span>
+            </div>
+            <div class="result-box">
+                <span class="label">ДИСТАНЦИЯ</span>
+                <span class="value" id="resDistance">---</span>
+                <span class="unit">метров</span>
+            </div>
+            <div class="result-box">
+                <span class="label">ВРЕМЯ ПОЛЕТА</span>
+                <span class="value" id="resTof">---</span>
+                <span class="unit">сек</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay" onclick="closeAllFullscreen()"></div>
+
+    <script src="app.js"></script>
+    <script src="db/2S3M1.js"></script>
+    <script src="db/2B14.js"></script>
+</body>
+
+</html>
