@@ -298,7 +298,13 @@ document.getElementById('calcBtn').addEventListener('click', () => {
 
     // === 5. ПОПРАВКА ЭЛЕВАЦИИ НА ВЫСОТУ ===
     const hDiff = targetAlt - gunAlt;
-    const elevHDiff = -(hDiff / 100) * deltaElev;
+    let elevHDiff = -(hDiff / 100) * deltaElev;
+
+    // Кастомный костыль для MT-12 Rapira: в игре баллистика кривая и 
+    // требует поправку на высоту примерно в 64/102 (~0.627) раз меньше геометрической.
+    if (weaponSel.value === "MT-12_Rapira") {
+        elevHDiff *= (64 / 102);
+    }
 
     // === ФИНАЛЬНЫЙ РАСЧЕТ ===
     const finalElev = baseElev + elevHDiff;
