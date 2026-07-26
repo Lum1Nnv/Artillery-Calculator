@@ -137,19 +137,24 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function parseGrid(strX, strY, offset) {
-    const cleanX = strX.replace(/\D/g, '');
-    const cleanY = strY.replace(/\D/g, '');
+    const rawX = String(strX).trim();
+    const rawY = String(strY).trim();
+
+    const xSign = rawX.startsWith('-') ? -1 : 1;
+    const ySign = rawY.startsWith('-') ? -1 : 1;
+    const cleanX = rawX.replace(/\D/g, '');
+    const cleanY = rawY.replace(/\D/g, '');
 
     if (!cleanX || !cleanY) return null;
 
     let x = 0, y = 0;
 
     if (cleanX.length === 3 && cleanY.length === 3) {
-        x = (parseInt(cleanX) * 100) + 50 + offset.x;
-        y = (parseInt(cleanY) * 100) + 50 + offset.y;
+        x = (xSign * parseInt(cleanX, 10) * 100) + 50 + offset.x;
+        y = (ySign * parseInt(cleanY, 10) * 100) + 50 + offset.y;
     } else if (cleanX.length === 4 && cleanY.length === 4) {
-        x = (parseInt(cleanX) * 10) + 50 + offset.x;
-        y = (parseInt(cleanY) * 10) + 50 + offset.y;
+        x = (xSign * parseInt(cleanX, 10) * 10) + 50 + offset.x;
+        y = (ySign * parseInt(cleanY, 10) * 10) + 50 + offset.y;
     } else {
         return null;
     }
