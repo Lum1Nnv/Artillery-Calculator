@@ -1,4 +1,4 @@
-registerWeapon("2B11", `
+registerWeapon("Mk45_Hammer", `
 
 HIGH 0 HE
 [
